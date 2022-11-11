@@ -11,6 +11,8 @@ int (*printf_function(char c))(va_list list)
 		{"c", printf_char},
 		{"s", printf_str},
 		{"%", printf_percent},
+		{"d", printf_d_i},
+		{"i", printf_d_i},
 		{NULL, NULL}
 	};
 	for (j = 0; *form[j].p_str != '\0'; j++)
