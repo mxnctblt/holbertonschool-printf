@@ -25,5 +25,7 @@ int printf_char(va_list list);
 int printf_str(va_list list);
 int printf_percent(va_list list);
 int (*printf_function(char c))(va_list list);
+int gestion_i(int arg);
+int printf_d_i(va_list list);
 
 #endif
