@@ -1,45 +1,43 @@
 #include "main.h"
-
 /**
- * _printf - function that print the string
- * @format: stock the type of char
- * Return: count.
+ * _printf - funtion that print.
+ * @format: const char type.
+ * Return: Number of digits.
  */
 int _printf(const char *format, ...)
 {
-	va_list arg;
-	char *x;
-	int i = 0, j = 0, count = 0;
-	form typ[] = {
-		{"c", printf_c},
-		{"s", printf_s},
-		{"%", printf_percent},
-		{NULL, NULL}
-	};
+	va_list list;
+	int count = 0, i = -1;
+	int (*z)(va_list);
 
-	x = "%";
-	va_start(arg, format);
-	if (format == NULL)
-		return (-1);
-	while (format && format[j])
+	va_start(list, format);
+
+	if (format != NULL)
 	{
-		if (format[j] == *x)
+		i = 0;
+		for (; format[count] != '\0'; i++, count++)
 		{
-			j++;
-			while (typ[i].type)
+			if (format[count] != '%')
+				_putchar(format[count]);
+			else if (format[count] == '%' && format[count + 1] == '\0')
 			{
-				if (*(typ[i].type) == format[j])
-				{
-					typ[i].f(arg, &count);
-				}
-				i++;
+				return (-1);
 			}
-			j++;
+			else if (format[count] == '%' && format[count + 1] != '\0')
+			{
+				z = printf_function(format[count + 1]);
+				if (z == NULL)
+					_putchar(format[count]);
+				else
+				{
+					i = (i + z(list)) - 1;
+					count++;
+				}
+			}
 		}
-		count++;
-		_putchar(format[j]);
-		j++;
 	}
-	va_end(arg);
-	return (count);
+	else
+		return (-1);
+	va_end(list);
+	return (i);
 }
