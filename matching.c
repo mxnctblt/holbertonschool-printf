@@ -17,12 +17,6 @@ int (*printf_function(char c))(va_list list)
 	{
 		if (form[j].p_str[0] == c)
 			return (form[j].f);
-		else if (form[j].p_str[0] != c)
-		{
-			_putchar('%');
-			_putchar(c);
-			return (NULL);
-		}
 	}
 	return (NULL);
 }
