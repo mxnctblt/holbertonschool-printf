@@ -18,13 +18,12 @@ int _printf(const char *format, ...)
 	};
 
 	x = "%";
-
 	va_start(arg, format);
+	if (format == NULL)
+		return (-1);
 	while (format && format[j])
 	{
-		if (format == NULL)
-			return (-1);
-		else if (format[j] == *x)
+		if (format[j] == *x)
 		{
 			j++;
 			while (typ[i].type)
